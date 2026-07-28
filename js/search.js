@@ -1,1 +1,1 @@
-console.log("Search page loaded");
+console.log("BookNest Search Page Loaded");
