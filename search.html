@@ -1,32 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Books</title>
-
-    <link rel="stylesheet" href="css/search.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Search Books | BookNest</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/search.css">
 </head>
 <body>
-
-<nav>
-    <a href="index.html">Home</a>
-    <a href="search.html">Search</a>
-    <a href="details.html">Book Details</a>
-    <a href="shelf.html">My Shelf</a>
-</nav>
-
-<main>
-
+<header>
 <h1>🔍 Search Books</h1>
-
 <p>
-Search books using the Google Books API.
+Find books by title or author.
 </p>
-
+</header>
+<nav>
+<a href="index.html">Home</a>
+<a href="search.html">Search Books</a>
+<a href="details.html">Book Details</a>
+<a href="shelf.html">My Shelf</a>
+</nav>
+<main>
+<section>
+<h2>Search Your Book</h2>
+<form>
+<label for="bookSearch">
+Book Title or Author
+</label>
+<input 
+type="text"
+id="bookSearch"
+name="bookSearch"
+placeholder="Enter book name">
+<button type="submit">
+Search
+</button>
+</form>
+</section>
+<section>
+<h2>Search Results</h2>
+<p>
+Books matching your search will appear here.
+</p>
+<div id="results">
+</div>
+</section>
 </main>
-
+<footer>
+<p>
+© 2026 BookNest | ZyoraByte Internship Project
+</p>
+</footer>
 <script src="js/search.js"></script>
-
 </body>
 </html>
