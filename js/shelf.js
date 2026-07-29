@@ -1,55 +1,207 @@
-const container = document.getElementById("shelfContainer");
+// ======================================
+// BookNest - My Shelf
+// ======================================
 
-let shelf = JSON.parse(localStorage.getItem("books")) || [];
+// DOM Elements
+const wantShelf = document.getElementById("wantShelf");
+const finishedShelf = document.getElementById("finishedShelf");
 
-if (shelf.length === 0) {
+const totalBooks = document.getElementById("totalBooks");
+const wantCount = document.getElementById("wantCount");
+const finishedCount = document.getElementById("finishedCount");
 
-    container.innerHTML = `
-    <h2>No books saved yet.</h2>
-    `;
+const emptyShelf = document.getElementById("emptyShelf");
 
-} else {
+// ======================================
+// Local Storage
+// ======================================
 
-    displayBooks();
-
+function getShelf() {
+    return JSON.parse(localStorage.getItem("myShelf")) || [];
 }
 
-function displayBooks() {
+function saveShelf(shelf) {
+    localStorage.setItem("myShelf", JSON.stringify(shelf));
+}
 
-    container.innerHTML = "";
+// ======================================
+// Render Shelf
+// ======================================
 
-    shelf.forEach((book, index) => {
+function renderShelf() {
 
-        const info = book.volumeInfo;
+    const shelf = getShelf();
 
-        container.innerHTML += `
+    wantShelf.innerHTML = "";
+    finishedShelf.innerHTML = "";
 
-        <div class="card">
+    // Counters
 
-        <img src="${info.imageLinks?.thumbnail || 'https://via.placeholder.com/150'}">
+    totalBooks.textContent = shelf.length;
 
-        <h3>${info.title}</h3>
+    const wantBooks = shelf.filter(book => book.status === "want");
 
-        <p>${info.authors ? info.authors.join(", ") : "Unknown"}</p>
+    const finishedBooks = shelf.filter(book => book.status === "finished");
 
-        <button onclick="removeBook(${index})">
-        Remove
-        </button>
+    wantCount.textContent = wantBooks.length;
 
-        </div>
+    finishedCount.textContent = finishedBooks.length;
 
-        `;
+    // Empty Shelf
+
+    if (shelf.length === 0) {
+
+        emptyShelf.classList.remove("hidden");
+
+    } else {
+
+        emptyShelf.classList.add("hidden");
+
+    }
+
+    // Render Want
+
+    wantBooks.forEach(book => {
+
+        wantShelf.appendChild(createCard(book));
+
+    });
+
+    // Render Finished
+
+    finishedBooks.forEach(book => {
+
+        finishedShelf.appendChild(createCard(book));
 
     });
 
 }
 
-function removeBook(index) {
+// ======================================
+// Create Book Card
+// ======================================
 
-    shelf.splice(index, 1);
+function createCard(book) {
 
-    localStorage.setItem("books", JSON.stringify(shelf));
+    const card = document.createElement("div");
 
-    displayBooks();
+    card.className = "book-card";
+
+    card.innerHTML = `
+
+        <img src="${book.image || 'https://via.placeholder.com/250x350?text=No+Cover'}"
+             alt="${book.title}">
+
+        <div class="book-content">
+
+            <h3>${book.title}</h3>
+
+            <p><strong>Author:</strong>
+            ${book.authors.join(", ")}</p>
+
+            <p><strong>Publisher:</strong>
+            ${book.publisher}</p>
+
+            <span class="status ${book.status}">
+                ${book.status === "want"
+                    ? "Want to Read"
+                    : "Finished"}
+            </span>
+
+            <div class="actions">
+
+                <button class="move-btn"
+                    onclick="toggleStatus('${book.id}')">
+
+                    ${book.status === "want"
+                        ? "✓ Finished"
+                        : "↩ Want"}
+
+                </button>
+
+                <button class="delete-btn"
+                    onclick="deleteBook('${book.id}')">
+
+                    Delete
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+    return card;
 
 }
+
+// ======================================
+// Move Book
+// ======================================
+
+function toggleStatus(id) {
+
+    const shelf = getShelf();
+
+    const book = shelf.find(item => item.id === id);
+
+    if (!book) return;
+
+    if (book.status === "want") {
+
+        book.status = "finished";
+
+    } else {
+
+        book.status = "want";
+
+    }
+
+    saveShelf(shelf);
+
+    renderShelf();
+
+}
+
+// ======================================
+// Delete Book
+// ======================================
+
+function deleteBook(id) {
+
+    const confirmDelete = confirm(
+        "Remove this book from your shelf?"
+    );
+
+    if (!confirmDelete) return;
+
+    let shelf = getShelf();
+
+    shelf = shelf.filter(book => book.id !== id);
+
+    saveShelf(shelf);
+
+    renderShelf();
+
+}
+
+// ======================================
+// Search (Optional)
+// ======================================
+
+function searchShelf(keyword) {
+
+    const shelf = getShelf();
+
+    return shelf.filter(book =>
+        book.title.toLowerCase().includes(keyword.toLowerCase())
+    );
+
+}
+
+// ======================================
+// Initial Load
+// ======================================
+
+renderShelf();

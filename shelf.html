@@ -1,42 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
 
-<title>BookNest | My Shelf</title>
+    <meta charset="UTF-8">
 
-<link rel="stylesheet"
-href="shelf.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BookNest | My Shelf</title>
+
+    <link rel="stylesheet" href="css/shelf.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/6c4c8f41f7.js" crossorigin="anonymous"></script>
 
 </head>
 
 <body>
 
-<header>
+    <!-- ================= NAVBAR ================= -->
 
-<h1>📚 My Shelf</h1>
+    <header>
 
-<nav>
+        <nav class="navbar">
 
-<a href="index.html">Home</a>
+            <div class="logo">
 
-<a href="search.html">Search</a>
+                📚 <span>BookNest</span>
 
-</nav>
+            </div>
 
-</header>
+            <ul>
 
-<main>
+                <li><a href="index.html">Home</a></li>
 
-<div id="shelfContainer">
+                <li><a href="search.html">Search</a></li>
 
-</div>
+                <li><a href="shelf.html" class="active">My Shelf</a></li>
 
-</main>
+            </ul>
 
-<script src="shelf.js"></script>
+        </nav>
+
+    </header>
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero">
+
+        <h1>📚 My Reading Shelf</h1>
+
+        <p>Track your reading journey with BookNest.</p>
+
+    </section>
+
+    <!-- ================= PROGRESS ================= -->
+
+    <section class="progress-section">
+
+        <div class="progress-card">
+
+            <div class="progress-item">
+
+                <h2 id="totalBooks">0</h2>
+
+                <p>Total Books</p>
+
+            </div>
+
+            <div class="progress-item">
+
+                <h2 id="wantCount">0</h2>
+
+                <p>Want to Read</p>
+
+            </div>
+
+            <div class="progress-item">
+
+                <h2 id="finishedCount">0</h2>
+
+                <p>Finished</p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ================= WANT TO READ ================= -->
+
+    <main class="container">
+
+        <section>
+
+            <h2 class="section-title">
+
+                <i class="fas fa-bookmark"></i>
+
+                Want to Read
+
+            </h2>
+
+            <div id="wantShelf" class="book-grid">
+
+            </div>
+
+        </section>
+
+        <!-- ================= FINISHED ================= -->
+
+        <section>
+
+            <h2 class="section-title">
+
+                <i class="fas fa-circle-check"></i>
+
+                Finished Reading
+
+            </h2>
+
+            <div id="finishedShelf" class="book-grid">
+
+            </div>
+
+        </section>
+
+        <!-- ================= EMPTY MESSAGE ================= -->
+
+        <div id="emptyShelf" class="empty hidden">
+
+            <img src="https://cdn-icons-png.flaticon.com/512/4076/4076478.png"
+                alt="Empty Shelf">
+
+            <h2>Your Shelf is Empty</h2>
+
+            <p>Add books from the Details page to build your reading collection.</p>
+
+            <a href="search.html" class="browse-btn">
+
+                Browse Books
+
+            </a>
+
+        </div>
+
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+
+            © 2026 BookNest | Book Finder & Reading Tracker
+
+        </p>
+
+    </footer>
+
+    <script src="js/shelf.js"></script>
 
 </body>
+
 </html>
