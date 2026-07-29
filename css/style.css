@@ -1,21 +1,197 @@
-main{
-    margin-top:30px;
+/* ==========================
+   Google Font
+========================== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+/* ==========================
+   CSS Variables
+========================== */
+:root{
+    --primary:#2563eb;
+    --primary-dark:#1d4ed8;
+    --secondary:#3b82f6;
+    --background:#f4f7fb;
+    --white:#ffffff;
+    --text:#333333;
+    --radius:12px;
+    --shadow:0 8px 20px rgba(0,0,0,.08);
 }
+/* ==========================
+   Reset
+========================== */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+/* ==========================
+   Body
+========================== */
 body{
-    font-family: Arial, sans-serif;
-    margin:20px;
+    font-family:'Poppins',sans-serif;
+    background:var(--background);
+    color:var(--text);
+    line-height:1.6;
 }
-nav{
+/* ==========================
+   Container
+========================== */
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+    padding:40px 0;
+}
+/* ==========================
+   Header
+========================== */
+header{
+    background:var(--primary);
+    color:white;
+    box-shadow:var(--shadow);
+}
+/* ==========================
+   Navbar
+========================== */
+.navbar{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
     display:flex;
-    gap:20px;
-    padding:15px;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 0;
 }
-nav a{
+.logo{
+    font-size:28px;
+    font-weight:700;
+}
+.logo span{
+    margin-left:5px;
+}
+.navbar ul{
+    display:flex;
+    list-style:none;
+    gap:25px;
+}
+.navbar a{
+    color:white;
     text-decoration:none;
+    font-weight:500;
+    transition:.3s;
 }
-section{
-    margin:30px 0;
+.navbar a:hover,
+.navbar .active{
+    color:#ffd54f;
 }
+/* ==========================
+   Hero
+========================== */
+.hero{
+    background:linear-gradient(135deg,var(--primary),var(--secondary));
+    color:white;
+    text-align:center;
+    padding:80px 20px;
+}
+.hero h1{
+    font-size:42px;
+    margin-bottom:20px;
+}
+.hero p{
+    max-width:700px;
+    margin:auto;
+    margin-bottom:30px;
+    font-size:18px;
+}
+/* ==========================
+   Button
+========================== */
+.btn{
+    display:inline-block;
+    padding:14px 28px;
+    background:white;
+    color:var(--primary);
+    text-decoration:none;
+    border-radius:var(--radius);
+    font-weight:600;
+    transition:.3s;
+}
+.btn:hover{
+    transform:translateY(-3px);
+}
+/* ==========================
+   Features
+========================== */
+.features{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+    margin:50px 0;
+}
+.card{
+    background:white;
+    padding:25px;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    transition:.3s;
+}
+.card:hover{
+    transform:translateY(-6px);
+}
+.card h2{
+    color:var(--primary);
+    margin-bottom:15px;
+}
+/* ==========================
+   About
+========================== */
+.about{
+    margin:50px 0;
+}
+.about h2{
+    color:var(--primary);
+    margin-bottom:15px;
+}
+/* ==========================
+   Footer
+========================== */
 footer{
-    margin-top:50px;
+    margin-top:60px;
+    padding:20px;
+    background:var(--primary);
+    color:white;
+    text-align:center;
+}
+/* ==========================
+   Responsive
+========================== */
+@media(max-width:768px){
+    .navbar{
+        flex-direction:column;
+        gap:20px;
+    }
+    .navbar ul{
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:15px;
+    }
+    .hero h1{
+        font-size:32px;
+    }
+    .hero p{
+        font-size:16px;
+    }
+}
+@media(max-width:480px){
+    .logo{
+        font-size:22px;
+    }
+    .hero{
+        padding:60px 20px;
+    }
+    .hero h1{
+        font-size:28px;
+    }
+    .container{
+        width:95%;
+    }
 }
