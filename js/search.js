@@ -33,6 +33,7 @@ form.addEventListener("submit", function (event) {
 async function searchBooks(query) {
     loading.classList.remove("hidden");
     searchButton.disabled = true;
+    searchButton.textContent = "Searching...";
     try {
         const response = await fetch(
             `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}`
@@ -52,6 +53,7 @@ async function searchBooks(query) {
         error.classList.remove("hidden");
     } finally {
         searchButton.disabled = false;
+        searchButton.textContent = "Search Books";
     }
 }
 // =============================
