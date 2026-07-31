@@ -154,6 +154,13 @@ No API key is required for basic book searches.
 * User authentication
 
 ---
+## 🧪 Testing Checklist
+
+- ✅ Book search using Google Books API
+- ✅ Loading state displayed while fetching data
+- ✅ Error message displayed when the API request fails
+- ✅ No results message shown for empty searches
+- ✅ Responsive layout tested on different screen sizes
 
 ## 📄 License
 
