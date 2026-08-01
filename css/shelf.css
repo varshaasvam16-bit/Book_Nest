@@ -222,6 +222,14 @@ header{
     color:white;
 }
 
+.read-btn{
+    background:#7c3aed;
+}
+
+.read-btn:hover{
+    background:#6d28d9;
+}
+
 .move-btn{
     background:#2563eb;
 }

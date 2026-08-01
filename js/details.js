@@ -19,6 +19,8 @@ const description = document.getElementById("description");
 
 const wantBtn = document.getElementById("wantBtn");
 const finishBtn = document.getElementById("finishBtn");
+const readBtn = document.getElementById("readBtn");
+const readMessage = document.getElementById("readMessage");
 
 const toast = document.getElementById("toast");
 
@@ -32,6 +34,7 @@ const bookId = params.get("id");
 // Current Book
 
 let currentBook = null;
+let readUrl = "";
 
 // ===============================
 // Fetch Book
@@ -46,19 +49,23 @@ async function loadBook() {
 
     try {
 
-        const response = await fetch(
-            `https://www.googleapis.com/books/v1/volumes/${bookId}`
-        );
+        let data;
 
-        if (!response.ok) {
-            throw new Error("Book not found");
+        if (bookId.startsWith("/")) {
+            data = await fetchOpenLibraryBook(bookId);
+        } else {
+            data = await fetchGoogleBook(bookId);
         }
 
-        const data = await response.json();
+        const readInfo = await resolveReadLink(data);
 
         currentBook = data;
+        readUrl = readInfo?.url || "";
+        currentBook.readUrl = readUrl;
+        currentBook.readable = Boolean(readUrl);
 
         displayBook(data);
+        updateReadButton();
 
     }
 
@@ -67,6 +74,141 @@ async function loadBook() {
         console.error(err);
 
         showError();
+
+    }
+
+}
+
+async function fetchGoogleBook(bookId) {
+
+    const response = await fetch(
+        `https://www.googleapis.com/books/v1/volumes/${bookId}`
+    );
+
+    if (!response.ok) {
+        throw new Error("Google Books request failed");
+    }
+
+    const data = await response.json();
+
+    return {
+        id: data.id,
+        volumeInfo: {
+            title: data.volumeInfo?.title || "Unknown",
+            authors: data.volumeInfo?.authors || ["Unknown"],
+            publisher: data.volumeInfo?.publisher || "Unknown",
+            publishedDate: data.volumeInfo?.publishedDate || "Unknown",
+            categories: data.volumeInfo?.categories || ["General"],
+            pageCount: data.volumeInfo?.pageCount || "N/A",
+            language: data.volumeInfo?.language || "N/A",
+            averageRating: data.volumeInfo?.averageRating || null,
+            description: data.volumeInfo?.description || "No description available.",
+            imageLinks: data.volumeInfo?.imageLinks || {}
+        }
+    };
+
+}
+
+async function fetchOpenLibraryBook(bookId) {
+
+    const response = await fetch(
+        `https://openlibrary.org${bookId}.json`
+    );
+
+    if (!response.ok) {
+        throw new Error("Open Library request failed");
+    }
+
+    const data = await response.json();
+
+    const description = typeof data.description === "string"
+        ? data.description
+        : data.description?.value || "No description available.";
+
+    return {
+        id: bookId,
+        volumeInfo: {
+            title: data.title || "Unknown",
+            authors: data.authors?.map(author => author.name || "Unknown") || ["Unknown"],
+            publisher: data.publishers?.[0] || "Unknown",
+            publishedDate: data.first_publish_date || "Unknown",
+            categories: [],
+            pageCount: data.number_of_pages || "N/A",
+            language: "EN",
+            averageRating: null,
+            description,
+            imageLinks: {
+                thumbnail: data.covers?.[0]
+                    ? `https://covers.openlibrary.org/b/id/${data.covers[0]}-M.jpg`
+                    : ""
+            }
+        }
+    };
+
+}
+
+async function resolveReadLink(book) {
+
+    const title = book.volumeInfo?.title || "";
+    const authors = book.volumeInfo?.authors || [];
+    const authorText = authors.join(" ").trim();
+    const query = [title, authorText].filter(Boolean).join(" ");
+
+    if (!query) return null;
+
+    try {
+
+        const response = await fetch(
+            `https://openlibrary.org/search.json?q=${encodeURIComponent(query)}&limit=5`
+        );
+
+        if (!response.ok) {
+            return null;
+        }
+
+        const data = await response.json();
+        const result = (data.docs || []).find(doc => doc.key) || (data.docs || [])[0];
+
+        if (!result) {
+            return null;
+        }
+
+        const archiveUrl = result.ia?.[0]
+            ? `https://archive.org/details/${result.ia[0]}`
+            : null;
+
+        const openLibraryUrl = result.key
+            ? `https://openlibrary.org${result.key}`
+            : null;
+
+        return {
+            url: archiveUrl || openLibraryUrl || null
+        };
+
+    } catch (err) {
+
+        console.warn("Could not resolve reading link.", err);
+        return null;
+
+    }
+
+}
+
+function updateReadButton() {
+
+    if (!readBtn || !readMessage) return;
+
+    if (readUrl) {
+
+        readBtn.disabled = false;
+        readMessage.classList.add("hidden");
+        readMessage.textContent = "";
+
+    } else {
+
+        readBtn.disabled = true;
+        readMessage.textContent = "This book is not available for online reading.";
+        readMessage.classList.remove("hidden");
 
     }
 
@@ -183,7 +325,9 @@ function addBook(status) {
                 currentBook.volumeInfo.publisher || "",
 
             description:
-                currentBook.volumeInfo.description || ""
+                currentBook.volumeInfo.description || "",
+
+            readUrl: currentBook.readUrl || ""
 
         });
 
@@ -230,6 +374,20 @@ wantBtn.addEventListener("click", () => {
 finishBtn.addEventListener("click", () => {
 
     addBook("finished");
+
+});
+
+readBtn.addEventListener("click", () => {
+
+    if (!readUrl) {
+
+        readMessage.textContent = "This book is not available for online reading.";
+        readMessage.classList.remove("hidden");
+        return;
+
+    }
+
+    window.open(readUrl, "_blank", "noopener,noreferrer");
 
 });
 

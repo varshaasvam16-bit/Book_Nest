@@ -87,6 +87,12 @@ function createCard(book) {
 
     card.className = "book-card";
 
+    const readButton = book.readUrl
+        ? `<button class="read-btn" onclick="openReadLink('${encodeURIComponent(book.readUrl)}')">
+            📖 Read
+        </button>`
+        : "";
+
     card.innerHTML = `
 
         <img src="${book.image || 'https://via.placeholder.com/250x350?text=No+Cover'}"
@@ -126,6 +132,8 @@ function createCard(book) {
 
                 </button>
 
+                ${readButton}
+
             </div>
 
         </div>
@@ -133,6 +141,16 @@ function createCard(book) {
     `;
 
     return card;
+
+}
+
+function openReadLink(encodedUrl) {
+
+    const url = decodeURIComponent(encodedUrl);
+
+    if (!url) return;
+
+    window.open(url, "_blank", "noopener,noreferrer");
 
 }
 
