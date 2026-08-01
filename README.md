@@ -161,6 +161,13 @@ No API key is required for basic book searches.
 - ✅ Error message displayed when the API request fails
 - ✅ No results message shown for empty searches
 - ✅ Responsive layout tested on different screen sizes
+---
+
+## 🌐 Deployment
+
+The project is deployed on **Vercel**.
+
+**Live URL:** https://booknest-brown.vercel.app
 
 ## 📄 License
 
