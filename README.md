@@ -1,46 +1,68 @@
 # 📚 BookNest – Book Finder & Reading Tracker
 
-BookNest is a responsive web application that helps users discover books using the Google Books API, explore book information, and maintain a personal reading shelf. The project is built with **HTML, CSS, and JavaScript** without using any frontend frameworks.
+BookNest is a responsive web application that helps users discover books using the **Google Books API**, explore detailed book information, and manage their personal reading shelf. Built with **HTML, CSS, and JavaScript**, the project provides a clean, responsive, and user-friendly reading experience without using any frontend frameworks.
 
 ---
 
-## 🚀 Features
-
-### ✅ Completed
+# ✨ Features
 
 * 🔍 Search books by title, author, or keyword using the Google Books API
-* 📖 Display book title, author, publisher, and cover image
-* ⏳ Loading indicator while fetching data
+* 📖 View detailed information about each book
+* 📚 Add books to a personal reading shelf
+* ⭐ Mark books as **Want to Read** or **Finished**
+* 💾 Save reading shelf using Local Storage
+* 📊 Track reading progress
+* ⏳ Loading indicator while fetching book data
 * ⚠️ Error handling for failed API requests
-* 📭 "No Results Found" message for empty searches
-* ✅ Client-side search form validation
-* 📱 Responsive design for desktop, tablet, and mobile devices
-* 🎨 Consistent UI with reusable styles
-* 🧭 Navigation across all project pages
+* 📭 Display **No Results Found** for empty searches
+* ✅ Client-side form validation
+* 📱 Fully responsive design for desktop, tablet, and mobile devices
+* 🎨 Consistent UI with reusable styling and navigation
 
 ---
 
-## 🚧 In Progress
+# 📸 Screenshots
 
-* 📖 Detailed book information page
-* 📚 My Shelf page
-* ⭐ Add books to "Want to Read" and "Finished"
-* 💾 Local Storage integration for reading shelf
-* 📊 Reading progress tracking
+### 🏠 Home Page
+
+![Home Page](screenshots/home.png)
+
+### 🏡 Home Page (Alternate View)
+
+![Home Page 2](screenshots/home2.png)
+
+### 🔍 Search Page
+
+![Search Page](screenshots/search.png)
+
+### 📚 Search Results
+
+![Search Results](screenshots/search%20result.png)
+
+### 📖 Book Details
+
+![View Details](screenshots/view%20details.png)
+
+### 📚 My Shelf
+
+![My Shelf](screenshots/shelf.png)
 
 ---
 
-## 🛠️ Technologies Used
+# 🛠️ Technologies Used
 
 * HTML5
 * CSS3
 * JavaScript (ES6)
 * Google Books API
 * Local Storage
+* Git
+* GitHub
+* Vercel
 
 ---
 
-## 📂 Project Structure
+# 📂 Project Structure
 
 ```text
 BookNest/
@@ -63,48 +85,54 @@ BookNest/
 ├── assets/
 │   └── images/
 │
+├── screenshots/
+│   ├── home.png
+│   ├── home2.png
+│   ├── search.png
+│   ├── search result.png
+│   ├── view details.png
+│   └── shelf.png
+│
 └── README.md
 ```
 
 ---
 
-## 👥 Team Members
+# 👥 Team Members
 
 * **Thillai Eswari T**
 * **Varshaa A.S**
 
 ---
 
-## 📋 Work Distribution
+# 📋 Work Distribution
 
-### Thillai Eswari T
+## Thillai Eswari T
 
 * Designed and developed the Home page
 * Developed the Search page
 * Integrated the Google Books API
-* Implemented search functionality using `fetch()`
+* Implemented book search functionality using `fetch()`
 * Added loading, error, and no-results states
-* Implemented search form validation
+* Implemented client-side search validation
 * Built responsive search result cards
 * Maintained responsive UI and shared styling
 
-### **Varshaa A.S – Contributions
+## Varshaa A.S
 
-* Developed the **Book Details** page.
-* Developed the **My Shelf** page.
-* Used **Local Storage** to save user data.
-* Added the feature to **add and remove books** from the reading shelf.
-* Created a **Reading Progress Tracker** to show reading progress.
-* Displayed book information such as title, author, cover image, and description.
-* Made the pages **responsive** for mobile and desktop.
-* Tested the features to make sure they work correctly.
+- Developed the **Book Details** page
+- Developed the **My Shelf** page
+- Implemented **Local Storage** to save user data
+- Added the feature to **add and remove books** from the reading shelf
+- Developed a **Reading Progress Tracker**
+- Displayed book information including title, author, cover image, and description
+- Ensured responsive design across desktop and mobile devices
+- Tested and verified the implemented features
 
 
----
+# 🔗 Google Books API
 
-## 🔗 Google Books API
-
-API Endpoint:
+**API Endpoint**
 
 ```text
 https://www.googleapis.com/books/v1/volumes?q={searchTerm}
@@ -114,65 +142,74 @@ No API key is required for basic book searches.
 
 ---
 
-## ▶️ How to Run
+# ▶️ How to Run Locally
 
 1. Clone the repository.
-2. Open the project folder.
-3. Open `index.html` in your browser.
-4. Navigate to the Search page.
-5. Search for any book using the Google Books API.
+
+```bash
+git clone https://github.com/varshaasvam16-bit/Book_Nest.git
+```
+
+2. Open the project folder in Visual Studio Code.
+3. Open `index.html` in your preferred web browser.
+4. Navigate to the **Search** page.
+5. Search for books by title, author, or keyword.
 
 ---
 
-## 📌 Project Status
+# 🧪 Testing Checklist
 
-### Completed
-
-* ✅ Home Page
-* ✅ Search Page
-* ✅ Google Books API Integration
-* ✅ Loading State
-* ✅ Error Handling
-* ✅ No Results State
-* ✅ Form Validation
-* ✅ Responsive Design
-* ✅ Shared Navigation and Styling
-
-### Remaining
-
-* 🚧 Book Details Page
-* 🚧 My Shelf
-* 🚧 Local Storage Integration
-* 🚧 Reading Progress Tracking
+* ✅ Book search using Google Books API
+* ✅ Loading state displayed while fetching data
+* ✅ Error message displayed when the API request fails
+* ✅ "No Results Found" message displayed correctly
+* ✅ Client-side search validation
+* ✅ Responsive layout tested on desktop, tablet, and mobile devices
+* ✅ Navigation links verified
+* ✅ Book Details page tested
+* ✅ My Shelf functionality tested
+* ✅ Local Storage saving and retrieving data verified
 
 ---
 
-## 🔮 Future Enhancements
+# 📌 Project Status
 
-* Search by category
-* Search by author filters
-* Favorites feature
-* Pagination for search results
-* Dark mode
-* Reading statistics dashboard
-* User authentication
+## ✅ Completed
+
+* Home Page
+* Search Page
+* Google Books API Integration
+* Book Details Page
+* My Shelf
+* Local Storage Integration
+* Reading Progress Tracking
+* Loading & Error States
+* Search Validation
+* Responsive Design
+* Shared Navigation & Styling
 
 ---
-## 🧪 Testing Checklist
 
-- ✅ Book search using Google Books API
-- ✅ Loading state displayed while fetching data
-- ✅ Error message displayed when the API request fails
-- ✅ No results message shown for empty searches
-- ✅ Responsive layout tested on different screen sizes
+# 🔮 Future Enhancements
+
+* 🌙 Dark Mode
+* ❤️ Favorites / Wishlist
+* 📄 Pagination for search results
+* 🏷️ Search by categories and genres
+* 📊 Reading statistics dashboard
+* 🔐 User authentication
+* ☁️ Cloud synchronization across devices
+
 ---
 
-## 🌐 Deployment
+# 🌐 Live Demo
 
-The project is deployed on **Vercel**.
+**Vercel Deployment**
 
-**Live URL:** https://booknest-brown.vercel.app
+https://booknest-brown.vercel.app
 
-## 📄 License
+---
 
-This project was developed as part of the **ZyoraByte Internship Program** for educational and learning purposes.
+# 📄 License
+
+This project was developed as part of the **ZyoraByte Frontend Developer Internship Program** for educational and learning purposes.
