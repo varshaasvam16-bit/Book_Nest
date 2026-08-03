@@ -88,13 +88,17 @@ BookNest/
 * Built responsive search result cards
 * Maintained responsive UI and shared styling
 
-### Varshaa A.S
+### **Varshaa A.S – Contributions
 
-* Developed the Book Details page
-* Developed the My Shelf page
-* Implemented Local Storage
-* Added reading shelf management
-* Developed reading progress tracking
+* Developed the **Book Details** page.
+* Developed the **My Shelf** page.
+* Used **Local Storage** to save user data.
+* Added the feature to **add and remove books** from the reading shelf.
+* Created a **Reading Progress Tracker** to show reading progress.
+* Displayed book information such as title, author, cover image, and description.
+* Made the pages **responsive** for mobile and desktop.
+* Tested the features to make sure they work correctly.
+
 
 ---
 
